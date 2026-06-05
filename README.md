@@ -1,6 +1,6 @@
 # Scripts de automatización del proyecto (casi "un clic")
 
-Estos scripts **configuran el proyecto solos**. Tú solo tienes que: crear las VMs Windows en
+Estos scripts **configuran el proyecto solos**. Permitiendo ahorrar tiempo y automatizar nuestro proyecto: crear las VMs Windows en
 VirtualBox/GNS3, copiar la carpeta `scripts/` dentro de cada VM y ejecutar el script que toca
 **como Administrador** (PowerShell: clic derecho → "Ejecutar como administrador").
 
