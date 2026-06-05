@@ -31,7 +31,3 @@ VirtualBox/GNS3, copiar la carpeta `scripts/` dentro de cada VM y ejecutar el sc
 .\01-config-ip.ps1 -NewName SQL02 -IP 10.10.10.32 -DNS 10.10.10.11
 .\01-config-ip.ps1 -NewName BACKUP01 -IP 10.10.30.41 -DNS 10.10.10.11
 ```
-
-> ⚠️ Lo único que NO se puede automatizar y debes hacer tú: **instalar el sistema operativo** en cada VM,
-> **arrancar las máquinas** y **capturar las pantallas** de funcionamiento (son TU evidencia). El resto
-> (configuración) lo hacen estos scripts.
