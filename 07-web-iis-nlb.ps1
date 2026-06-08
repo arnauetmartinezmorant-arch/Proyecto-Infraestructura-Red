@@ -21,4 +21,3 @@ if ($Rol -eq "primero") {
   Get-NlbCluster -HostName WEB01 | Add-NlbClusterNode -NewNodeName $env:COMPUTERNAME -NewNodeInterface "Ethernet"
 }
 Get-NlbClusterNode | Format-Table Name, State   # -> Converged (EVIDENCIA)
-# NOTA: en VirtualBox pon el adaptador de WEB01/WEB02 en modo promiscuo "Permitir todo".
