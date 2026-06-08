@@ -87,9 +87,7 @@ New-GPO -Name "GPO_Oficinas_Restrictiva"  | New-GPLink -Target "OU=Oficinas,DC=c
 ```powershell
 Set-ADDefaultDomainPasswordPolicy -Identity corp.local -MinPasswordLength 10 -ComplexityEnabled $true -LockoutThreshold 5
 ```
-> 📸 **Evidencias FASE 2:** `repadmin /replsummary` OK - árbol de OUs/grupos - GPO aplicada (TC-11) - alta de usuario (TC-15). -> `evidencias/02_dominio/`
 
----
 
 # FASE 3 - DATOS: SQL Server Always On (RN02, RN04, US_04, NFR_02)
 1. Instala **SQL Server** en SQL01 y SQL02 + **SSMS**.
@@ -130,9 +128,6 @@ CREATE AVAILABILITY GROUP AG_Intranet FOR DATABASE intranet_corporativa
             'SQL02' WITH (ENDPOINT_URL='TCP://SQL02.corp.local:5022', AVAILABILITY_MODE=SYNCHRONOUS_COMMIT, FAILOVER_MODE=AUTOMATIC);
 ALTER AVAILABILITY GROUP AG_Intranet ADD LISTENER 'AG-Intranet' (WITH IP (('10.10.10.30','255.255.255.0')), PORT=1433);
 ```
-> 📸 **Evidencias FASE 3:** *Availability Group Dashboard* en *Synchronized/Healthy* - prueba de failover (FASE 8). -> `evidencias/03_datos/`
-
----
 
 # FASE 4 - WEB: IIS + balanceo NLB (RN02, balanceo de carga)
 **WEB01 y WEB02:**
@@ -149,9 +144,6 @@ Get-NlbClusterNode | ft Name,State    # -> Converged
 ```
 **Sincronizar contenido WEB01->WEB02:** `robocopy C:\inetpub\wwwroot \\WEB02\c$\inetpub\wwwroot /MIR`
 > En VirtualBox: adaptadores de WEB01/WEB02 en **modo promiscuo: Permitir todo** (para NLB).
-> 📸 **Evidencias FASE 4:** NLB *Converged* - web servida por la VIP. -> `evidencias/04_web/`
-
----
 
 # FASE 5 - COPIAS 3-2-1 (RN04, US_04)
 ```powershell
@@ -162,9 +154,7 @@ Backup-GPO -All -Path "\\BACKUP01\Copias$\GPO"
 robocopy \\BACKUP01\Copias$ \\OFFSITE\Copias$ /MIR /Z    # 1 copia OFFSITE
 ```
 **Prueba de restauración (TC-14):** `RESTORE DATABASE ... WITH MOVE ... RECOVERY;` (ver `windows/alta-disponibilidad.md`).
-> 📸 **Evidencias FASE 5:** log de copia correcta - captura de restauración. -> `evidencias/05_backup/`
 
----
 
 # FASE 6 - EXPLOTACIÓN DE LA INFORMACIÓN (RN05, US_07, NFR auditoría)
 1. **Métricas (PerfMon):** Data Collector Sets (CPU/RAM/disco/red/IIS/SQL) - ver `observabilidad/metricas-logs-y-alertas.md`.
@@ -178,9 +168,7 @@ robocopy \\BACKUP01\Copias$ \\OFFSITE\Copias$ /MIR /Z    # 1 copia OFFSITE
 
 # FASE 7 - ACCESO REMOTO VPN (RN01 / US_09 / FR_09)
 En FW-RRAS: consola **Enrutamiento y acceso remoto** -> configurar **VPN SSTP**, dar permiso de marcado al grupo `GG_Tecnicos` y abrir el puerto 443 (SSTP).
-> 📸 **Evidencia:** conexión VPN establecida desde un cliente externo. -> `evidencias/01_red/`
 
----
 
 # FASE 8 - PRUEBAS DE ACEPTACIÓN (TC-11 a TC-15 + failovers)
 | Prueba | Acción | Evidencia |
@@ -191,9 +179,7 @@ En FW-RRAS: consola **Enrutamiento y acceso remoto** -> configurar **VPN SSTP**,
 | Failover BD | `Stop-Service MSSQLSERVER` en SQL01 | SQL02 pasa a primaria |
 | TC-14 Restauración | Restaurar BD/archivo desde backup | Restauración OK |
 | TC-15 Alta usuario | Crear usuario y verificar OU/grupo | Usuario creado |
-> 📸 Todo en -> `evidencias/07_pruebas/`
 
----
 
 # Mapa de cumplimiento (requisito -> cómo se cumple)
 | Requisito | Cómo se cumple |
