@@ -20,14 +20,3 @@ VirtualBox/GNS3, copiar la carpeta `scripts/` dentro de cada VM y ejecutar el sc
 | 8 | WEB01 y WEB02 | `07-web-iis-nlb.ps1` | Instala IIS + crea/une el clúster NLB |
 | 9 | BACKUP01/SQL01 | `08-backup-3-2-1.ps1` | Tareas programadas de copia 3-2-1 |
 | 10 | servidores | `09-explotacion.ps1` | Métricas (PerfMon) + reenvío de logs (WEF) |
-
-## Ejemplos de IP a pasar al paso 1 (`01-config-ip.ps1`)
-```powershell
-.\01-config-ip.ps1 -NewName DC1   -IP 10.10.10.11 -DNS 127.0.0.1
-.\01-config-ip.ps1 -NewName DC2   -IP 10.10.10.12 -DNS 10.10.10.11
-.\01-config-ip.ps1 -NewName WEB01 -IP 10.10.10.22 -DNS 10.10.10.11
-.\01-config-ip.ps1 -NewName WEB02 -IP 10.10.10.23 -DNS 10.10.10.11
-.\01-config-ip.ps1 -NewName SQL01 -IP 10.10.10.31 -DNS 10.10.10.11
-.\01-config-ip.ps1 -NewName SQL02 -IP 10.10.10.32 -DNS 10.10.10.11
-.\01-config-ip.ps1 -NewName BACKUP01 -IP 10.10.30.41 -DNS 10.10.10.11
-```
