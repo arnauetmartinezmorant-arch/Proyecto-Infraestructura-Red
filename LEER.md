@@ -1,4 +1,4 @@
-# Scripts de automatización del proyecto (casi "un clic")
+# Scripts de automatización del proyecto
 
 Estos scripts **configuran el proyecto solos**. Permitiendo ahorrar tiempo y automatizar nuestro proyecto: crear las VMs Windows en
 VirtualBox/GNS3, copiar la carpeta `scripts/` dentro de cada VM y ejecutar el script que toca
